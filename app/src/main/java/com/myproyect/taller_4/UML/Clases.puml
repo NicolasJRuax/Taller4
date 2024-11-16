@@ -1,0 +1,55 @@
+@startuml
+class MainActivity {
+    + onCreate(Bundle)
+    + setGreetingMessage(TextView)
+}
+
+class MainScreenActivity {
+    + onCreate(Bundle)
+    + onSensorChanged(SensorEvent)
+    + onItemSelected(Item)
+    + clearShoppingList()
+    + notifyWidgetUpdate()
+}
+
+class Item {
+    - name : String
+    - quantity : int
+    - brand : String
+    - estimatedPrice : double
+    + getName() : String
+    + getQuantity() : int
+    + getBrand() : String
+    + getEstimatedPrice() : double
+}
+
+class ItemListFragment {
+    + onCreateView(LayoutInflater, ViewGroup, Bundle)
+    + clearList()
+}
+
+class ItemDetailFragment {
+    + newInstance(Item) : ItemDetailFragment
+    + onCreateView(LayoutInflater, ViewGroup, Bundle)
+}
+
+class ShoppingListManager {
+    + getShoppingList() : List<Item>
+    + saveShoppingList(List<Item>)
+}
+
+class ShoppingListWidget {
+    + onUpdate(Context, AppWidgetManager, int[])
+    + onReceive(Context, Intent)
+    + updateWidget(Context, AppWidgetManager, int)
+}
+
+MainActivity --> MainScreenActivity : Navigates to
+MainScreenActivity o--> ShoppingListManager : Uses
+MainScreenActivity --> ItemListFragment : Displays
+MainScreenActivity --> ItemDetailFragment : Displays
+ItemListFragment --> ShoppingListManager : Uses
+ItemListFragment --> Item : Manages
+ShoppingListManager --> Item : Serializes/Deserializes
+ShoppingListWidget --> ShoppingListManager : Reads Data
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+actor User
+
+usecase "Ver saludo personalizado" as UC1
+usecase "Abrir la pantalla principal" as UC2
+usecase "Agregar un artículo" as UC3
+usecase "Eliminar un artículo" as UC4
+usecase "Ver detalles de un artículo" as UC5
+usecase "Borrar toda la lista al agitar" as UC6
+usecase "Actualizar el widget" as UC7
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+UC6 --> UC7 : Notifica
+@enduml
